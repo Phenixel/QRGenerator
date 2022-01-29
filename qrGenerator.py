@@ -19,14 +19,17 @@ qr = qrcode.QRCode(
 ##########################
 
 def change_color():
+    global choseColor
     choseColor = askcolor(title="Choisir une couleur")[1]
-    
+
+def change_color_back():
+    global backColor
+    backColor = askcolor(title="Choisir une couleur de fond")[1]
 
 def clicked():
     qr.add_data(link.get())
     qr.make(fit=True)
-
-    img = qr.make_image(fill_color=choseColor.get(), back_color= backColor.get())
+    img = qr.make_image(fill_color=choseColor, back_color= backColor)
     img.save(nomFile.get()+'.png')
     messagebox.showinfo('Message title','Message content')
 
@@ -49,12 +52,6 @@ lblNameFile.grid(column=0, row=3)
 link = Entry(window,width=10)
 link.grid(column=1, row=0)
 
-choseColor = Entry(window,width=10)
-choseColor.grid(column=2, row=1)
-
-backColor = Entry(window,width=10)
-backColor.grid(column=1, row=2)
-
 nomFile = Entry(window,width=10)
 nomFile.grid(column=1, row=3)
 
@@ -65,6 +62,9 @@ btn.grid(column=0, row=5)
 
 btn = Button(window, text="Select a Color", bg="white", fg="black", command=change_color)
 btn.grid(column=1, row=1)
+
+btn = Button(window, text="Select a Color", bg="white", fg="black", command=change_color_back)
+btn.grid(column=1, row=2)
 
 ##########################
 window.mainloop()
