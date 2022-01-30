@@ -33,11 +33,15 @@ def change_color_back():
     backColor = askcolor(title="Choisir une couleur de fond")[1]
 
 def generate():
-    qr.add_data(link.get())
-    qr.make(fit=True)
-    img = qr.make_image(fill_color=choseColor, back_color= backColor)
-    img.save(nomFile.get()+'.png')
-    messagebox.showinfo('Oppération réussie','Votre qr code a bien été générer !')
+    if link.get() != "":
+        #  AND choseColor != "" AND back_color != ""
+        qr.add_data(link.get())
+        qr.make(fit=True)
+        img = qr.make_image(fill_color=choseColor, back_color= backColor)
+        img.save(nomFile.get()+'.png')
+        messagebox.showinfo('Oppération réussie','Votre qr code a bien été généré !')
+    else:
+        messagebox.showwarning('Champs manquant','Un ou plusieurs champs sont manquants. Merci de bien vouloir les remplir.')
 
 ############# Labels #############
 
